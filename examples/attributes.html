@@ -1,0 +1,55 @@
+<!doctype html>
+<title>element - dhtml</title>
+
+<style>
+  @import '/static/styles.css';
+</style>
+
+<script type="module">
+  import {define, html, refs} from '/static/dhtml.js';
+
+  const counterTemplate = html`
+    <button ref="decrement">-</button>
+    <span ref="label"></span>
+    <button ref="increment">+</button>
+    <button ref="reset">↻</button>
+  `;
+
+  define(
+    'my-counter',
+    {
+      count: {
+        get: Number,
+      },
+    },
+    (element) => {
+      const view = counterTemplate();
+      const { label, decrement, increment, reset } = refs(view);
+
+      function update() {
+        label.textContent = element.count;
+      }
+
+      decrement.onclick = () => {
+        element.count -= 1;
+      };
+      
+      increment.onclick = () => {
+        element.count += 1;
+      };
+      
+      reset.onclick = () => {
+        element.count = 0;
+      };
+
+      element.onconnect = update;
+      element.onattributechange = update;
+
+      return view;
+    }
+  );
+</script>
+
+<my-counter></my-counter>
+<my-counter count="1"></my-counter>
+<my-counter count="2"></my-counter>
