@@ -6,7 +6,7 @@
 </style>
 
 <script type="module">
-  import {html, refs} from '/static/dhtml.js';
+  import { html, refs } from '/static/dhtml.js';
 
   const counterTemplate = html`
     <button ref="decrement">-</button>
@@ -40,10 +40,10 @@
   document.body.append(
     Counter({ count: 0 }),
     Counter({ count: 1 }),
-    Counter({ count: 2 }),
+    Counter({ count: 2 })
   );
 </script>
 
-<a href="/">&lt; back</a>
-
-<hr/>
+<nav>
+  <a href="/" rel="home">⌂ home</a>
+</nav>

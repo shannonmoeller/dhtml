@@ -6,7 +6,7 @@
 </style>
 
 <script type="module">
-  import {define, html, refs, createStore} from '/static/dhtml.js';
+  import { define, html, refs, createStore } from '/static/dhtml.js';
 
   const counterTemplate = html`
     <button ref="decrement">-</button>
@@ -15,7 +15,7 @@
     <button ref="reset">↻</button>
   `;
 
-  function Counter() {
+  function Counter(element) {
     const view = counterTemplate();
     const { label, decrement, increment, reset } = refs(view);
     
@@ -45,9 +45,9 @@
   document.body.append(Counter());
 </script>
 
-<a href="/">&lt; back</a>
-
-<hr/>
+<nav>
+  <a href="/" rel="home">⌂ home</a>
+</nav>
 
 <my-counter></my-counter>
 <my-counter></my-counter>

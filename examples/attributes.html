@@ -1,12 +1,12 @@
 <!doctype html>
-<title>element - dhtml</title>
+<title>attributes - dhtml</title>
 
 <style>
   @import '/static/styles.css';
 </style>
 
 <script type="module">
-  import {define, html, refs} from '/static/dhtml.js';
+  import { define, html, refs } from '/static/dhtml.js';
 
   const counterTemplate = html`
     <button ref="decrement">-</button>
@@ -48,12 +48,17 @@
       return view;
     }
   );
+    
+  const two = document.createElement('my-counter');
+
+  two.count = 2;
+
+  document.body.append(two);
 </script>
 
-<a href="/">&lt; back</a>
-
-<hr/>
+<nav>
+  <a href="/" rel="home">⌂ home</a>
+</nav>
 
 <my-counter></my-counter>
 <my-counter count="1"></my-counter>
-<my-counter count="2"></my-counter>

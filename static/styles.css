@@ -1,17 +1,25 @@
 body {
   font: normal 16px/1.6 sans-serif;
-  padding: 3em;
+  margin: 3em;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
-  margin-top: 0;
 }
 
-hr {
-  background: #ddd;
-  border: 0;
-  margin: 1em 0 2em;
-  height: 1px;
-  width: 100%;
+nav {
+  display: block;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 3em;
+  padding-bottom: 0.5em;
+}
+
+a {
+  color: dodgerblue;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  text-decoration: underline;
 }

@@ -6,7 +6,7 @@
 </style>
 
 <script type="module">
-  import {define, html, refs, repeat} from '/static/dhtml.js';
+  import { define, html, refs, repeat } from '/static/dhtml.js';
   
   function shuffle(arr) {
     let a = arr.length;
@@ -118,8 +118,8 @@
   define('todo-app', TodoApp);
 </script>
 
-<a href="/">&lt; back</a>
-
-<hr/>
+<nav>
+  <a href="/" rel="home">⌂ home</a>
+</nav>
 
 <todo-app></todo-app>

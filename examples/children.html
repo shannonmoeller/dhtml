@@ -1,0 +1,43 @@
+<!doctype html>
+<title>children - dhtml</title>
+
+<style>
+  @import '/static/styles.css';
+  
+  .wrapper {
+    color: red;
+  }
+</style>
+
+<script type="module">
+  import { define, html, refs } from '/static/dhtml.js';
+
+  const containerTemplate = html`
+    <div>before</div>
+    <div class="wrapper" ref="slot"></div>
+    <div>after</div>
+  `;
+
+  function Container(element) {
+    const view = containerTemplate();
+    const { slot } = refs(view);
+    
+    slot.append(...element.childNodes);
+
+    return view;
+  }
+
+  define('my-container', Container);
+  
+  document.body.append(
+    Container({ childNodes: ['goodnight'] }),
+    Container({ childNodes: ['moon'] })
+  );
+</script>
+
+<nav>
+  <a href="/" rel="home">⌂ home</a>
+</nav>
+
+<my-container>hello</my-container>
+<my-container>world</my-container>
