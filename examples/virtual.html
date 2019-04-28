@@ -1,8 +1,9 @@
 <!doctype html>
+<meta charset="utf-8" />
 <title>virtual - dhtml</title>
 
 <style>
-  @import '/static/styles.css';
+  @import '/static/dhtml.css';
 </style>
 
 <script type="module">
@@ -12,11 +13,12 @@
     <button ref="decrement">-</button>
     <span ref="label"></span>
     <button ref="increment">+</button>
+    <button ref="reset">↻</button>
   `;
 
   function Counter(props) {
     const view = counterTemplate();
-    const { label, decrement, increment } = refs(view);
+    const { label, decrement, increment, reset } = refs(view);
 
     function update() {
       label.textContent = props.count;
@@ -29,6 +31,11 @@
 
     increment.onclick = () => {
       props.count += 1;
+      update();
+    };
+
+    reset.onclick = () => {
+      props.count = 0;
       update();
     };
     

@@ -1,19 +1,8 @@
-const templateCache = new WeakMap();
+const fragmentCache = new WeakMap();
 
-export function refs(node) {
-  const refs = {};
-
-  node.querySelectorAll('[ref]').forEach(ref => {
-    refs[ref.getAttribute('ref')] = ref;
-    ref.removeAttribute('ref');
-  });
-
-  return refs;
-}
-
-export function tmpl(strings) {
-  if (templateCache.has(strings)) {
-    return templateCache.get(strings);
+export function createFragment(strings) {
+  if (fragmentCache.has(strings)) {
+    return fragmentCache.get(strings);
   }
 
   const template = document.createElement('template');
@@ -22,19 +11,18 @@ export function tmpl(strings) {
   
   const { content } = template;
 
-  templateCache.set(strings, content);
+  fragmentCache.set(strings, content);
 
   return content;
 }
 
-export function html(strings) {
-  const content = tmpl(strings);
+export function createTemplate(strings) {
+  const content = createFragment(strings);
   
   return () => content.cloneNode(true);
 }
 
-export function svg(strings) {
-  const content = tmpl(strings);
-  
-  return () => content.cloneNode(true);
-}
+export {
+  createTemplate as html,
+  createTemplate as svg,
+};

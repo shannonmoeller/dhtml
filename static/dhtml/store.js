@@ -1,22 +1,6 @@
 export function createStore(state) {
   const listeners = new Set();
 
-  function subscribe(fn, immediate = true) {
-    listeners.add(fn);
-
-    if (immediate) {
-      fn(state);
-    }
-
-    return () => {
-      listeners.delete(fn);
-    };
-  }
-
-  function dispatch() {
-    listeners.forEach((fn) => fn(state));
-  }
-
   function get() {
     return state;
   }
@@ -26,13 +10,22 @@ export function createStore(state) {
       ? next(state)
       : next;
 
-    dispatch();
+    listeners.forEach((fn) => fn(state));
+  }
+
+  function subscribe(fn, immediate = true) {
+    listeners.add(fn);
+
+    if (immediate) {
+      fn(state);
+    }
+
+    return () => listeners.delete(fn);
   }
 
   return {
-    subscribe,
-    dispatch,
     get,
     set,
+    subscribe,
   };
 }

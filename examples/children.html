@@ -1,21 +1,16 @@
 <!doctype html>
+<meta charset="utf-8" />
 <title>children - dhtml</title>
 
 <style>
-  @import '/static/styles.css';
-  
-  .wrapper {
-    color: red;
-  }
+  @import '/static/dhtml.css';
 </style>
 
 <script type="module">
   import { define, html, refs } from '/static/dhtml.js';
 
   const containerTemplate = html`
-    <div>before</div>
-    <div class="wrapper" ref="slot"></div>
-    <div>after</div>
+    [[<span ref="slot"></span>]]
   `;
 
   function Container(element) {

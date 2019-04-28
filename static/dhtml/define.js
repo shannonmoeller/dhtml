@@ -1,14 +1,15 @@
-const isInitialized = Symbol('com.npmjs.dhtml.define.initialized');
+const isInitializedProp = Symbol('com.npmjs.dhtml.define.initialized');
 
 export function hyphenate(value) {
   return value
     .split(/([A-Z]?[a-z]+)/)
+    .map(x => x.trim())
     .filter(Boolean)
     .join('-')
     .toLowerCase();
 }
 
-export function normalizeAttribute([name, def = {}]) {
+export function normalizeAttribute(name, def = {}) {
   return {
     ...def,
     name,
@@ -23,17 +24,13 @@ export function reflectAttribute(node, def) {
   const isBoolean = get === Boolean;
 
   Object.defineProperty(node, name, {
-    get() {
-      return isBoolean
-        ? node.hasAttribute(attr)
-        : get(node.getAttribute(attr));
-    },
+    get: () => isBoolean
+      ? node.hasAttribute(attr)
+      : get(node.getAttribute(attr)),
 
-    set(value) {
-      return isBoolean
-        ? node.toggleAttribute(attr, value)
-        : node.setAttribute(attr, set(value));
-    },
+    set: (value) => isBoolean
+      ? node.toggleAttribute(attr, value)
+      : node.setAttribute(attr, set(value)),
   });
 }
 
@@ -45,7 +42,7 @@ export function define(tagName, attrs, init) {
 
   const attrDefs = Object
     .entries(attrs)
-    .map(normalizeAttribute);
+    .map(x => normalizeAttribute(...x));
 
   const observedAttributes = attrDefs
     .map((x) => x.attr);
@@ -64,7 +61,7 @@ export function define(tagName, attrs, init) {
     }
 
     connectedCallback() {
-      if (!this[isInitialized]) {
+      if (!this[isInitializedProp]) {
         const children = init(this);
 
         if (children) {
@@ -75,7 +72,7 @@ export function define(tagName, attrs, init) {
           }
         }
 
-        this[isInitialized] = true;
+        this[isInitializedProp] = true;
       }
 
       if (this.onconnect) {

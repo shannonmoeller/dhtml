@@ -5,7 +5,7 @@ const repeatDefaults = {
   key: 'key',
 };
 
-function getKeyedChildNodes(parent) {
+export function getKeyedChildNodes(parent) {
   const keyedNodes = {};
 
   let node = parent.firstChild;

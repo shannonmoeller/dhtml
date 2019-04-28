@@ -1,8 +1,9 @@
 <!doctype html>
+<meta charset="utf-8" />
 <title>store - dhtml</title>
 
 <style>
-  @import '/static/styles.css';
+  @import '/static/dhtml.css';
 </style>
 
 <script type="module">
@@ -15,7 +16,7 @@
     <button ref="reset">↻</button>
   `;
 
-  function Counter(element) {
+  function Counter() {
     const view = counterTemplate();
     const { label, decrement, increment, reset } = refs(view);
     

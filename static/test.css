@@ -1,0 +1,24 @@
+.test {
+  display: block;
+  margin: 0;
+}
+
+.test--comment {
+  color: dodgerblue;
+}
+
+.test--success {
+  color: seagreen;
+}
+
+.test--error {
+  color: deeppink;
+}
+
+.test--skip {
+  color: orange;
+}
+
+.test--todo {
+  color: yellow;
+}
