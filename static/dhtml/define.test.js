@@ -102,7 +102,7 @@ test('define()', async (t) => {
     }
   );
 
-  t.ok(HTMLElement.isPrototypeOf(elClass), 'is class');
+  t.equal(HTMLElement.isPrototypeOf(elClass), true, 'is class');
 
   const el = document.createElement('foo-bar');
 

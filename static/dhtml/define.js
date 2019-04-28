@@ -42,7 +42,7 @@ export function define(tagName, attrs, init) {
 
   const attrDefs = Object
     .entries(attrs)
-    .map(x => normalizeAttribute(...x));
+    .map((x) => normalizeAttribute(...x));
 
   const observedAttributes = attrDefs
     .map((x) => x.attr);

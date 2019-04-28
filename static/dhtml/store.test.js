@@ -6,9 +6,9 @@ test.title('store.js');
 test('createStore(value)', async (t) => {
   const store = createStore();
   
-  t.ok(store.hasOwnProperty('get'));
-  t.ok(store.hasOwnProperty('set'));
-  t.ok(store.hasOwnProperty('subscribe'));
+  t.equal(store.hasOwnProperty('get'), true);
+  t.equal(store.hasOwnProperty('set'), true);
+  t.equal(store.hasOwnProperty('subscribe'), true);
 });
 
 test('get()', async (t) => {
