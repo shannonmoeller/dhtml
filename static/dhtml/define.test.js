@@ -19,7 +19,7 @@ test('hyphenate(str)', async (t) => {
   t.equal(hyphenate('HTMLDivElement'), 'html-div-element');
 });
 
-test('normalizeAttribute()', async (t) => {
+test('normalizeAttribute(str, obj)', async (t) => {
   t.deepEqual(
     normalizeAttribute('foo', {}),
     {
@@ -55,7 +55,7 @@ test('normalizeAttribute()', async (t) => {
   );
 });
 
-test('reflectAttribute()', async (t) => {
+test('reflectAttribute(obj)', async (t) => {
   const node = document.createElement('div');
   
   reflectAttribute(node, {
@@ -85,7 +85,7 @@ test('reflectAttribute()', async (t) => {
   t.deepEqual(node.getAttribute('bat-baz'), '{"baz":"bat"}');
 });
 
-test('define()', async (t) => {
+test('define(str [, obj], fn)', async (t) => {
   const elClass = define(
     'foo-bar',
     {

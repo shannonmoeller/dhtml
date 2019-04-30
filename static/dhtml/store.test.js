@@ -11,7 +11,7 @@ test('createStore(value)', async (t) => {
   t.equal(store.hasOwnProperty('subscribe'), true);
 });
 
-test('get()', async (t) => {
+test('store.get()', async (t) => {
   const a = createStore(0);
   const b = createStore({});
   
@@ -19,7 +19,7 @@ test('get()', async (t) => {
   t.deepEqual(b.get(), {});
 });
 
-test('set(value)', async (t) => {
+test('store.set(value)', async (t) => {
   const a = createStore(0);
   const b = createStore({ foo: 1 });
   
@@ -30,7 +30,7 @@ test('set(value)', async (t) => {
   t.deepEqual(b.get(), { foo: 2 });
 });
 
-test('set(fn)', async (t) => {
+test('store.set(fn)', async (t) => {
   const a = createStore(0);
   const b = createStore({ foo: 1 });
 
@@ -41,7 +41,7 @@ test('set(fn)', async (t) => {
   t.deepEqual(b.get(), { foo: 1, bar: 2 });
 });
 
-test('subscribe(fn)', async (t) => {
+test('store.subscribe(fn)', async (t) => {
   const a = createStore(0);
   let count = 0;
   
@@ -62,7 +62,7 @@ test('subscribe(fn)', async (t) => {
   t.equal(a.get(), 2);
 });
 
-test('unsubscribe()', async (t) => {
+test('store.unsubscribe()', async (t) => {
   const a = createStore(0);
   let count = 0;
   
