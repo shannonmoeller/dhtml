@@ -2,7 +2,7 @@ const keyProp = Symbol('com.npmjs.dhtml.repeat.key');
 
 const repeatDefaults = {
   update: () => {},
-  key: 'key',
+  key: 'key'
 };
 
 export function getKeyedChildNodes(parent) {
@@ -21,7 +21,7 @@ export function getKeyedChildNodes(parent) {
 export function repeat(options) {
   const { parent, items, create, update, key } = {
     ...repeatDefaults,
-    ...options,
+    ...options
   };
 
   const getKey = typeof key === 'function' ? key : item => item[key];
@@ -32,24 +32,24 @@ export function repeat(options) {
   items.forEach(item => {
     const key = getKey(item);
     let node = keyedNodes[key];
-    
+
     if (node) {
       update(node, item);
     } else {
       node = create(item);
     }
-    
+
     node[keyProp] = key;
-    
+
     if (prevNode) {
       prevNode.after(node);
     } else {
       parent.prepend(node);
     }
-    
+
     prevNode = node;
   });
-  
+
   while (prevNode && prevNode.nextSibling) {
     prevNode.nextSibling.remove();
   }

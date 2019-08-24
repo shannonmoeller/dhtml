@@ -23,3 +23,8 @@ a:focus,
 a:hover {
   text-decoration: underline;
 }
+
+pre {
+  display: block;
+  margin: 0;
+}

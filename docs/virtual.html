@@ -1,13 +1,12 @@
 <!doctype html>
-<meta charset="utf-8" />
 <title>virtual - dhtml</title>
 
 <style>
-  @import '/static/dhtml.css';
+  @import '/index.css';
 </style>
 
 <script type="module">
-  import { html, refs } from '/static/dhtml.js';
+  import { html, refs } from '/index.js';
 
   const counterTemplate = html`
     <button ref="decrement">-</button>
@@ -38,7 +37,7 @@
       props.count = 0;
       update();
     };
-    
+
     update();
 
     return view;

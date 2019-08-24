@@ -1,13 +1,12 @@
 <!doctype html>
-<meta charset="utf-8" />
 <title>children - dhtml</title>
 
 <style>
-  @import '/static/dhtml.css';
+  @import '/index.css';
 </style>
 
 <script type="module">
-  import { define, html, refs } from '/static/dhtml.js';
+  import { define, html, refs } from '/index.js';
 
   const containerTemplate = html`
     [[<span ref="slot"></span>]]
@@ -16,14 +15,14 @@
   function Container(element) {
     const view = containerTemplate();
     const { slot } = refs(view);
-    
+
     slot.append(...element.childNodes);
 
     return view;
   }
 
   define('my-container', Container);
-  
+
   document.body.append(
     Container({ childNodes: ['goodnight'] }),
     Container({ childNodes: ['moon'] })

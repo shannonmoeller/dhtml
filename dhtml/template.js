@@ -8,7 +8,7 @@ export function createFragment(strings) {
   const template = document.createElement('template');
 
   template.innerHTML = strings.join('');
-  
+
   const { content } = template;
 
   fragmentCache.set(strings, content);
@@ -18,11 +18,8 @@ export function createFragment(strings) {
 
 export function createTemplate(strings) {
   const content = createFragment(strings);
-  
+
   return () => content.cloneNode(true);
 }
 
-export {
-  createTemplate as html,
-  createTemplate as svg,
-};
+export { createTemplate as html, createTemplate as svg };

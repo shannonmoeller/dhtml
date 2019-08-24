@@ -1,13 +1,12 @@
 <!doctype html>
-<meta charset="utf-8" />
-<title>store - dhtml</title>
+<title>stateful - dhtml</title>
 
 <style>
-  @import '/static/dhtml.css';
+  @import '/index.css';
 </style>
 
 <script type="module">
-  import { define, html, refs, createStore } from '/static/dhtml.js';
+  import { define, html, refs } from '/index.js';
 
   const counterTemplate = html`
     <button ref="decrement">-</button>
@@ -19,30 +18,35 @@
   function Counter() {
     const view = counterTemplate();
     const { label, decrement, increment, reset } = refs(view);
-    
-    const count = createStore(0);
 
-    count.subscribe((state) => {
-      label.textContent = state;
-    });
+    let count = 0;
+
+    function update() {
+      label.textContent = count;
+    }
 
     decrement.onclick = () => {
-      count.set(x => x - 1);
+      count -= 1;
+      update();
     };
 
     increment.onclick = () => {
-      count.set(x => x + 1);
+      count += 1;
+      update();
     };
 
     reset.onclick = () => {
-      count.set(0);
+      count = 0;
+      update();
     };
+
+    update();
 
     return view;
   }
 
   define('my-counter', Counter);
-  
+
   document.body.append(Counter());
 </script>
 

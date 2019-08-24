@@ -1,4 +1,4 @@
-const isInitializedProp = Symbol('com.npmjs.dhtml.define.initialized');
+const isInitializedProp = Symbol('com.npmjs.dhtml.define.isInitialized');
 
 export function hyphenate(value) {
   return value
@@ -10,16 +10,17 @@ export function hyphenate(value) {
 }
 
 export function normalizeAttribute(name, def = {}) {
+  const { attr, get, set } = def;
+
   return {
-    ...def,
     name,
-    attr: def.attr || hyphenate(name),
-    get: def.get || String,
-    set: def.set || String,
+    attr: attr || hyphenate(name),
+    get: get || String,
+    set: set || String
   };
 }
 
-export function reflectAttribute(node, def) {
+export function reflectAttribute(node, def = {}) {
   const { name, attr, get, set } = def;
   const isBoolean = get === Boolean;
 
@@ -28,9 +29,9 @@ export function reflectAttribute(node, def) {
       ? node.hasAttribute(attr)
       : get(node.getAttribute(attr)),
 
-    set: (value) => isBoolean
+    set: value => isBoolean
       ? node.toggleAttribute(attr, value)
-      : node.setAttribute(attr, set(value)),
+      : node.setAttribute(attr, set(value))
   });
 }
 
@@ -40,12 +41,11 @@ export function define(tagName, attrs, init) {
     attrs = {};
   }
 
-  const attrDefs = Object
-    .entries(attrs)
-    .map((x) => normalizeAttribute(...x));
+  const attrDefs = Object.entries(attrs).map(
+    ([name, def]) => normalizeAttribute(name, def)
+  );
 
-  const observedAttributes = attrDefs
-    .map((x) => x.attr);
+  const observedAttributes = attrDefs.map(x => x.attr);
 
   class CustomElement extends HTMLElement {
     static get observedAttributes() {
